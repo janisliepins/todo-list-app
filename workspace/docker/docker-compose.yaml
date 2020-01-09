@@ -1,0 +1,26 @@
+version: '3.4'
+services:
+  todo_list_mysql:
+    image: mysql:latest
+    build:
+      context: .
+      dockerfile: mysql.dockerfile
+    container_name: mysql_db   
+    restart: always
+    env_file:
+      - mysql.env
+    ports:
+      - '3306:3306'    
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      todo_list_app_network:
+        aliases:
+          - mysql_db
+
+volumes:
+  mysql_data:
+
+networks:
+  todo_list_app_network:
+  
