@@ -1,4 +1,5 @@
 const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
 const app = express();
 const router = express.Router();
 const port = 3000;
@@ -6,8 +7,16 @@ const routes = require('./routes');
 const settings = require('./settings');
 const middlewares = require('./middlewares');
 const bodyParser = require('body-parser');
+const schema = require('./schema');
+const resolvers = require('./resolvers');
 
 const jsonParser = bodyParser.json();
+
+const server = new ApolloServer({
+	typeDefs: schema,
+	resolvers: resolvers
+});
+server.applyMiddleware({ app });
 
 const knex = require('knex')({
 	client: 'mysql',

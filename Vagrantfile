@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder "./workspace", "/home/vagrant/todo-list-app"
+  config.vm.synced_folder ".", "/home/vagrant/todo-list-app", type: "rsync", rsync__exclude: [".vagrant","Vagrantfile"]
 
 
   # Provider-specific configuration so you can fine-tune various
@@ -88,10 +88,5 @@ Vagrant.configure("2") do |config|
     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
     apt install nodejs -y > /dev/null 2>&1
     apt install build-essential -y > /dev/null 2>&1   
-    ################################ MOUNT NODE MODULE FOLDER INSIDE GUEST ################################
-    mkdir /home/vagrant/vagrant_todo_list_node_modules
-    mkdir /home/vagrant/todo-list-app/todo-list-api/node_modules
-    chown -R vagrant:vagrant /home/vagrant  
-    mount --bind /home/vagrant/vagrant_todo_list_node_modules /home/vagrant/todo-list-app/todo-list-api/node_modules
   SHELL
 end
