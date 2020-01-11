@@ -1,12 +1,3 @@
-const { gql } = require('apollo-server-express');
+const taskResolvers = require('./task');
 
-const taskSchema = require('./task');
-// const listSchema = require('./list');
-
-const linkSchema = gql`
-	type Query {
-		_: Boolean
-	}
-`;
-
-module.exports = [ linkSchema, taskSchema ];
+module.exports = [taskResolvers];

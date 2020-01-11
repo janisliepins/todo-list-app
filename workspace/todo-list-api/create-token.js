@@ -1,5 +1,5 @@
 const settings = require('./settings');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const knex = require('knex')({

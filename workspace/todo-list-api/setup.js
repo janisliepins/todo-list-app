@@ -4,7 +4,7 @@ const knex = require('knex')({
 	connection: settings.database
 });
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
 knex.schema

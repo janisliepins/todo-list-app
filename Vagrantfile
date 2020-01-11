@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   config.vm.synced_folder ".", "/vagrant", disabled: true
-  config.vm.synced_folder ".", "/home/vagrant/todo-list-app", type: "rsync", rsync__exclude: [".vagrant","Vagrantfile"]
+  config.vm.synced_folder "./workspace", "/home/vagrant/todo-list-app"
 
 
   # Provider-specific configuration so you can fine-tune various

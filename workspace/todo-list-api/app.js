@@ -24,8 +24,8 @@ const knex = require('knex')({
 });
 app.locals.knex = knex;
 
-router.get('/tasks', middlewares.authenticate, routes.tasks.getAllTasks);
-router.get('/tasks/:id', middlewares.authenticate, middlewares.getIdAsInteger, routes.tasks.getTask);
+router.get('/tasks', routes.tasks.getAllTasks);
+router.get('/tasks/:id', middlewares.getIdAsInteger, routes.tasks.getTask);
 router.post('/tasks', jsonParser, routes.tasks.createTask);
 router.patch('/tasks/:id', jsonParser, middlewares.getIdAsInteger, routes.tasks.patchTask);
 router.delete('/tasks/:id', middlewares.getIdAsInteger, routes.tasks.deleteTask);
