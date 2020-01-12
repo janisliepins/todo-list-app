@@ -1,5 +1,5 @@
 function getAllTasks(req, res) {
-	console.log(req.decoded);
+	// console.log(req.decoded);
 
 	const { knex } = req.app.locals;
 	const { orderBy } = req.query;

@@ -56,7 +56,8 @@ Vagrant.configure("2") do |config|
     vb.gui = false
     vb.name = "todo-list-dev-vm"
     # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    vb.memory = "4096"
+    vb.cpus = 2
   end
 
   #

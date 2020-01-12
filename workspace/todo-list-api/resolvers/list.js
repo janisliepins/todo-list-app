@@ -3,18 +3,19 @@ const axios = require('axios');
 
 module.exports = {
 	Query: {
-		tasks: async (parent, args, context) => {
+		lists: async (parent, args, context) => {
 			return await axios
-				.get(`${base}/tasks`, {
+				.get(`${base}/lists`, {
 					headers: {
 						Authorization: context.authHeader
 					}
 				})
 				.then((response) => response.data);
 		},
-		task: async (parent, { task_id }, context) => {
+		list: async (parent, { task_list_id }, context) => {
+			console.log(parent);
 			return await axios
-				.get(`${base}/tasks/${task_id}`, {
+				.get(`${base}/lists/${task_list_id}`, {
 					headers: {
 						Authorization: context.authHeader
 					}
@@ -22,11 +23,12 @@ module.exports = {
 				.then((response) => response.data);
 		}
 	},
-	Task: {
-		task_list: async (parent, args, context) => {
+	List: {
+		tasks: async (parent, args, context) => {
+			// const { task_list_id } = parent;
 			// console.log(parent);
 			return await axios
-				.get(`${base}/lists/${parent.task_list}`, {
+				.get(`${base}/lists/${parent.task_list_id}/tasks`, {
 					headers: {
 						Authorization: context.authHeader
 					}
