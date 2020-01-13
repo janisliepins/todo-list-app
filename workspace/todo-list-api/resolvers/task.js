@@ -1,4 +1,6 @@
-const base = 'http://localhost:3000/api';
+require('dotenv').config();
+
+const base = process.env.EXPRESS_API_URL;
 const axios = require('axios');
 
 module.exports = {

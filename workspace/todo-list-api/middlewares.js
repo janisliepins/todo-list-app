@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const jwt = require('jsonwebtoken');
 
 function getIdAsInteger(req, res, next) {
@@ -14,7 +16,7 @@ function authenticate(req, res, next) {
 	if (authorization) {
 		// Authorization: Bearer token
 		const token = authorization.split(' ')[1];
-		jwt.verify(token, 's3cr3t', (error, decodedToken) => {
+		jwt.verify(token, process.env.JWT_SECRET, (error, decodedToken) => {
 			if (error) {
 				return res.status(401).json('Authentication error');
 			} else {

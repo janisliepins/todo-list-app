@@ -11,6 +11,7 @@ const schema = require('./schema');
 const resolvers = require('./resolvers');
 const cluster = require('cluster');
 const os = require('os');
+const cors = require('cors');
 
 if (cluster.isMaster) {
 	const cpuCount = os.cpus().length;
@@ -28,6 +29,7 @@ if (cluster.isMaster) {
 		}
 	});
 	server.applyMiddleware({ app });
+	app.use(cors()); // every request goes trough
 
 	const knex = require('knex')({
 		client: 'mysql',

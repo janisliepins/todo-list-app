@@ -1,3 +1,4 @@
+require('dotenv').config();
 const settings = require('./settings');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -24,7 +25,7 @@ knex('users')
 					username: 'janis',
 					isAdmin: true
 				};
-				const secret = 's3cr3t'; // process.env.secret
+				const secret = process.env.JWT_SECRET; // process.env.secret
 				const expiresIn = 3600;
 				const token = jwt.sign(payload, secret, { expiresIn });
 				console.log(token);
@@ -33,6 +34,3 @@ knex('users')
 			}
 		});
 	});
-
-/* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImphbmlzIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTc4NjEyMzM1LCJleHAiOjE1Nzg2MTU5MzV9.FzjUIr33kltWSacwA-m1DTZTQ2-734t3I7eqG39pQuk 
-*/

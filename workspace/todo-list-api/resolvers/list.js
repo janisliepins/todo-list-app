@@ -1,4 +1,6 @@
-const base = 'http://localhost:3000/api';
+require('dotenv').config();
+
+const base = process.env.EXPRESS_API_URL;
 const axios = require('axios');
 
 module.exports = {
@@ -13,7 +15,7 @@ module.exports = {
 				.then((response) => response.data);
 		},
 		list: async (parent, { task_list_id }, context) => {
-			console.log(parent);
+			// console.log(parent);
 			return await axios
 				.get(`${base}/lists/${task_list_id}`, {
 					headers: {
