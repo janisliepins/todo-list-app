@@ -77,11 +77,7 @@ Vagrant.configure("2") do |config|
     ################################ INSTALL DOCKER ################################
     curl -fsSL get.docker.com -o get-docker.sh > /dev/null 2>&1
     sh get-docker.sh
-    usermod -aG docker vagrant
-    ################################ INSTALL DOCKER MACHINE ################################
-    curl -L https://github.com/docker/machine/releases/download/v0.16.2/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine > /dev/null 2>&1
-    chmod +x /tmp/docker-machine 
-    cp /tmp/docker-machine /usr/local/bin/docker-machine
+    usermod -aG docker vagrant    
     ################################ INSTALL DOCKER COMPOSE ################################
     curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose > /dev/null 2>&1
     chmod +x /usr/local/bin/docker-compose
