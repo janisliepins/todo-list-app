@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "bento/ubuntu-18.04"
+  config.vagrant.plugins = ["vagrant-docker-compose"]
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -58,6 +59,8 @@ Vagrant.configure("2") do |config|
     # Customize the amount of memory on the VM:
     vb.memory = "4096"
     vb.cpus = 2
+    # Increase video memory for windowed mode
+    # vb.customize ["modifyvm", :id, "--vram", "16"]
   end
 
   #
@@ -75,15 +78,18 @@ Vagrant.configure("2") do |config|
     apt-get update > /dev/null 2>&1
     apt-get dist-upgrade -y > /dev/null 2>&1
     ################################ INSTALL DOCKER ################################
-    curl -fsSL get.docker.com -o get-docker.sh > /dev/null 2>&1
-    sh get-docker.sh
-    usermod -aG docker vagrant    
+    # curl -fsSL get.docker.com -o get-docker.sh > /dev/null 2>&1
+    # sh get-docker.sh
+    # usermod -aG docker vagrant    
     ################################ INSTALL DOCKER COMPOSE ################################
-    curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose > /dev/null 2>&1
-    chmod +x /usr/local/bin/docker-compose
+    # curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose > /dev/null 2>&1
+    # chmod +x /usr/local/bin/docker-compose
     ################################ INSTALL NODE JS AND NPM ################################
     curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
     apt install nodejs -y > /dev/null 2>&1
     apt install build-essential -y > /dev/null 2>&1   
   SHELL
+
+  config.vm.provision :docker
+  config.vm.provision :docker_compose, yml: "/home/vagrant/todo-list-app/docker/docker-compose.yml", run: "always"
 end
